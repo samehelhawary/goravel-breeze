@@ -39,4 +39,6 @@ Then add mysql connection in .env file (Optional)
 go run . artisan breeze:install
 ```
 
+```bash 
 go run .
+```
