@@ -1,0 +1,51 @@
+{{ extends "../layouts/app" }}
+
+{{ block body() }}
+    <div class="flex justify-center">
+        <div class="w-4/12 bg-white p-6 rounded-lg">
+            <form action="/register" method="post">
+                {{ csrf_field() | raw }}
+
+                <div class="mb-4">
+                    <label for="name" class="sr-only">Name</label>
+                    <input type="text" name="name" id="name" placeholder="Your name" value="{{ if isset(old.name) }}{{old.name}}{{ end }}" class="bg-gray-100 border-2 w-full p-4 rounded-lg {{ if hasError("name") }} {{ "border-red-500" }} {{ end }}">
+                    {{ if hasError("name") }}
+                        <div class="text-red-500 mt-2 text-sm">
+                            {{ firstError("name") }}
+                        </div>
+                    {{ end }}
+                </div>
+                <div class="mb-4">
+                    <label for="email" class="sr-only">Email</label>
+                    <input type="text" name="email" id="email" placeholder="Your email address" value="{{ if isset(old.email) }}{{old.email}}{{ end }}" class="bg-gray-100 border-2 w-full p-4 rounded-lg {{ if hasError("email") }} {{ "border-red-500" }} {{ end }}">
+                    {{ if hasError("email") }}
+                        <div class="text-red-500 mt-2 text-sm">
+                            {{ firstError("email") }}
+                        </div>
+                    {{ end }}
+                </div>
+                <div class="mb-4">
+                    <label for="password" class="sr-only">Password</label>
+                    <input type="password" name="password" id="password" placeholder="Password" class="bg-gray-100 border-2 w-full p-4 rounded-lg {{ if hasError("password") }} {{ "border-red-500" }} {{ end }}">
+                    {{ if hasError("password") }}
+                    <div class="text-red-500 mt-2 text-sm">
+                        {{ firstError("password") }}
+                    </div>
+                    {{ end }}
+                </div>
+                <div class="mb-4">
+                    <label for="password_confirmation" class="sr-only">Password again</label>
+                    <input type="password" name="password_confirmation" id="password_confirmation" placeholder="Password again" class="bg-gray-100 border-2 w-full p-4 rounded-lg {{ if hasError("password_confirmation") }} {{ "border-red-500" }} {{ end }}">
+                    {{ if hasError("password_confirmation") }}
+                    <div class="text-red-500 mt-2 text-sm">
+                        {{ firstError("password_confirmation") }}
+                    </div>
+                    {{ end }}
+                </div>
+                <div>
+                    <button type="submit" class="bg-blue-500 text-white px-4 py-3 rounded font-medium w-full">Register</button>
+                </div>
+            </form>
+        </div>
+    </div>
+{{ end }}

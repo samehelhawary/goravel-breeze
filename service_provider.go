@@ -18,8 +18,6 @@ type ServiceProvider struct {
 func (receiver *ServiceProvider) Register(app foundation.Application) {
 	App = app
 
-	// fmt.Println(app.BasePath("app/console"))
-
 	app.Bind(Binding, func(app foundation.Application) (any, error) {
 		return nil, nil
 	})
@@ -28,14 +26,18 @@ func (receiver *ServiceProvider) Register(app foundation.Application) {
 	receiver.goravelFiberProvider.Register(app)
 
 	app.Publishes("github.com/samehelhawary/goravel-breeze", map[string]string{
-		"routes":           app.BasePath("routes"),
-		"resources":        app.BasePath("resources"),
-		"config/http.go":   app.ConfigPath("http.go"),
-		"config/breeze.go": app.ConfigPath("breeze.go"),
+		"resources":           app.BasePath("resources"),
+		"app":                 app.BasePath("app"),
+		"database/migrations": app.BasePath("database/migrations"),
+		"database/seeders":    app.BasePath("database/seeders"),
+		"config/breeze.go":    app.ConfigPath("breeze.go"),
+		"config/http.go":      app.ConfigPath("http.go"),
+		"config/session.go":   app.ConfigPath("session.go"),
 	})
 
 	app.Commands([]console.Command{
 		&commands.Install{},
+		&commands.Migrate{},
 	})
 }
 
