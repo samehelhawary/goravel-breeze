@@ -36,7 +36,7 @@ go mod tidy
 Then add mysql connection in .env file (Optional)
 
 ```bash
-go run . artisan breeze:install
+go run . artisan breeze:install && go run . artisan breeze:migrate
 ```
 
 ```bash 
