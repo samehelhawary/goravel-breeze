@@ -11,18 +11,8 @@ import (
 )
 
 func Web() {
-
-	// Create middleware instances
-	//generateToken := middleware.NewGenerateCSRFToken()
-	//csrfProtection := middleware.NewCSRFFiber()
-
-	// Apply to all routes that need CSRF
-	//app.Use(generateToken.Handle())
-
 	facades.Route().Get("/", func(ctx http.Context) http.Response {
-		return ctx.Response().View().Make("home", map[string]any{
-			"version": support.Version,
-		})
+		return ctx.Response().View().Make("home", map[string]any{})
 	})
 
 	dashboardController := controllers.NewDashboardController()
@@ -41,13 +31,4 @@ func Web() {
 		router.Post("/login", authController.Store)
 		router.Post("/logout", authController.Logout)
 	})
-
-	//facades.Route().Get("/debug-db", func(ctx http.Context) http.Response {
-	//	var count int64
-	//	err := facades.Orm().Query().Table("users").Count(&count)
-	//	if err != nil {
-	//		return ctx.Response().String(500, "DATABASE CONNECTION FAILED: "+err.Error())
-	//	}
-	//	return ctx.Response().String(200, fmt.Sprintf("Successfully connected to DB. Found %d users.", count))
-	//})
 }
